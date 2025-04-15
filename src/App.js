@@ -27,6 +27,9 @@ import AdminCategory from "./pages/AdminCategory";
 import AdminCategoryNew from "./pages/AdminCategoryNew";
 import AdminOrders from "./pages/AdminOrders";
 import AdminOrder from "./pages/AdminOrder";
+import AdminBanners from "./pages/AdminBanners";
+import AdminBanner from "./pages/AdminBanner";
+import AdminBannerNew from "./pages/AdminBannerNew";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -54,6 +57,9 @@ const App = () => {
           <Route path="/admin_newcategory" element={<AdminCategoryNew />} />
           <Route path="/admin_orders" element={<AdminOrders />} />
           <Route path="/admin_orders/:id" element={<AdminOrder />} />
+          <Route path="/admin_banners" element={<AdminBanners />} />
+          <Route path="/admin_banners/:id" element={<AdminBanner />} />
+          <Route path="/admin_new_banner" element={<AdminBannerNew />} />
 
           {!user ? (
             <>

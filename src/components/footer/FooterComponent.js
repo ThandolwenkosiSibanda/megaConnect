@@ -230,6 +230,10 @@ const FooterPage = () => {
                     <li>
                       <Link to={`/admin_orders`}>Admin Orders</Link>
                     </li>
+
+                    <li>
+                      <Link to={`/admin_banners`}>Admin Banners</Link>
+                    </li>
                     {/* <li>
                       <Link to={`/contact_us`}>Contact Us</Link>
                     </li> */}

@@ -12,7 +12,7 @@ import PageTitle from "../components/titles/PageTitle";
 import ErrorMessage from "../components/spinners/ErrorMessage";
 import BigLoading from "../components/spinners/Loading";
 
-const AdminProducts = () => {
+const AdminBanners = () => {
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -24,14 +24,10 @@ const AdminProducts = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchQuery, setSearchQuery] = useState("");
 
-  console.log("searchQuery", searchQuery);
-
   const fetchData = async () => {
     setError("");
     try {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*, category(*)");
+      const { data, error } = await supabase.from("banners").select("*");
 
       console.log("error", error);
 
@@ -64,8 +60,8 @@ const AdminProducts = () => {
         sortedData.sort((a, b) => {
           if (sortBy === "name") {
             return sortOrder === "asc"
-              ? a?.name.localeCompare(b?.name)
-              : b?.name.localeCompare(a?.name);
+              ? a.name.localeCompare(b.name)
+              : b.name.localeCompare(a.name);
           } else if (sortBy === "guest_price") {
             return sortOrder === "asc"
               ? a.guest_price - b.guest_price
@@ -101,7 +97,7 @@ const AdminProducts = () => {
       <div className="page">
         <NavBar />
 
-        <PageTitle name={"Products"} />
+        <PageTitle name={"Admin Banners"} />
         {error && !loading && <ErrorMessage message={error.message} />}
 
         {loading ? (
@@ -140,11 +136,11 @@ const AdminProducts = () => {
                   </div>
 
                   <Link
-                    to={`/newproduct`}
+                    to={`/admin_new_banner`}
                     style={{ marginBottom: "20px" }}
                     className="ttm-btn ttm-btn-size-md ttm-btn-shape-square ttm-btn-style-fill ttm-icon-btn-left ttm-btn-color-skincolor"
                   >
-                    New Product
+                    New Banner
                   </Link>
                 </div>
 
@@ -155,14 +151,6 @@ const AdminProducts = () => {
                         <tr>
                           <th className="product-subtotal">Created</th>
                           <th className="product-subtotal">Name</th>
-                          <th className="product-subtotal">Guest Price</th>
-                          <th className="product-subtotal">
-                            Trade Account Price
-                          </th>
-                          <th className="product-subtotal">Bulk Price</th>
-                          <th className="product-subtotal">Category</th>
-                          <th className="product-subtotal">Status</th>
-
                           <th className="product-subtotal"></th>
                         </tr>
                       </thead>
@@ -174,31 +162,9 @@ const AdminProducts = () => {
                               {format(item.created_at, "dd-MMM-yyyy")}
                             </th>
                             <th className="product-subtotal"> {item.name}</th>
-                            <th className="product-subtotal">
-                              {" "}
-                              {item.guest_price}
-                            </th>
 
                             <th className="product-subtotal">
-                              {" "}
-                              {item.trade_account_price}
-                            </th>
-
-                            <th className="product-subtotal">
-                              {" "}
-                              {item.bulk_price}
-                            </th>
-                            <th className="product-subtotal">
-                              {" "}
-                              {item.category?.name}
-                            </th>
-
-                            <th className="product-subtotal"> {item.status}</th>
-
-                            <th className="product-subtotal">
-                              <Link to={`/admin_products/${item.id}`}>
-                                View
-                              </Link>
+                              <Link to={`/admin_banners/${item.id}`}>View</Link>
                             </th>
                           </tr>
                         ))}
@@ -230,4 +196,4 @@ const AdminProducts = () => {
   );
 };
 
-export default AdminProducts;
+export default AdminBanners;
