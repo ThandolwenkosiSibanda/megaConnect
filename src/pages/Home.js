@@ -34,23 +34,34 @@ export default function BusinessProfileCard() {
     FN:${profile.first_name} ${profile.last_name}
     ORG:${profile.company_name}
     TITLE:${profile.title || "Owner"}
-    TEL;TYPE=WORK,VOICE:${profile.phone_work || ""}
-    TEL;TYPE=CELL,VOICE:${profile.phone_mobile || ""}
-    TEL;TYPE=HOME,VOICE:${profile.phone_home || ""}
-    EMAIL;TYPE=WORK:${profile.email_work || ""}
-    EMAIL;TYPE=HOME:${profile.email_home || ""}
-    URL:${profile.website_url || ""}
-    ADR;TYPE=WORK:;;${profile.address_street || ""};${
-      profile.address_city || ""
-    };${profile.address_state || ""};${profile.address_zip || ""};${
-      profile.address_country || ""
+    TEL;TYPE=WORK,VOICE:${profile.phone_work || "+123456789"}
+    TEL;TYPE=CELL,VOICE:${profile.phone_mobile || "+1987654321"}
+    TEL;TYPE=HOME,VOICE:${profile.phone_home || "+1123456789"}
+    EMAIL;TYPE=WORK:${profile.email_work || "elizabeth@barcenasdesign.com"}
+    EMAIL;TYPE=HOME:${profile.email_home || "elizabeth.home@example.com"}
+    URL:${profile.website_url || "https://barcenasdesign.com"}
+    ADR;TYPE=WORK:;;${profile.address_street || "123 Design Street"};${
+      profile.address_city || "Los Angeles"
+    };${profile.address_state || "CA"};${profile.address_zip || "90210"};${
+      profile.address_country || "USA"
     }
-    BDAY:${profile.birthday || ""}
-    NOTE:${profile.bio || ""}
-    PHOTO;TYPE=JPEG;VALUE=URI:${profile.avatar_url || ""}
-    X-SOCIALPROFILE;TYPE=linkedin:${profile.linkedin_url || ""}
-    X-SOCIALPROFILE;TYPE=facebook:${profile.facebook_url || ""}
-    X-SOCIALPROFILE;TYPE=youtube:${profile.youtube_url || ""}
+    BDAY:${profile.birthday || "1985-05-12"}
+    NOTE:${
+      profile.notes ||
+      "Award-winning designer and creative director at Barcenas Design."
+    }
+    PHOTO;TYPE=JPEG;VALUE=URI:${
+      profile.photo_url || "https://randomuser.me/api/portraits/women/44.jpg"
+    }
+    X-SOCIALPROFILE;TYPE=linkedin:${
+      profile.linkedin_url || "https://www.linkedin.com/in/elizabethbarcenas"
+    }
+    X-SOCIALPROFILE;TYPE=facebook:${
+      profile.facebook_url || "https://facebook.com/elizabethbarcenas"
+    }
+    X-SOCIALPROFILE;TYPE=youtube:${
+      profile.youtube_url || "https://youtube.com/elizabethbarcenas"
+    }
     REV:${new Date().toISOString().replace(/[-:]/g, "").split(".")[0]}Z
     END:VCARD
     `.trim();
