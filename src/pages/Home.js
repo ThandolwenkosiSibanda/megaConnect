@@ -28,42 +28,27 @@ export default function BusinessProfileCard() {
 
   const handleAddToContacts = () => {
     const vCardData = `
-    BEGIN:VCARD
-    VERSION:3.0
-    N:${profile.last_name};${profile.first_name};;;
-    FN:${profile.first_name} ${profile.last_name}
-    ORG:${profile.company_name}
-    TITLE:${profile.title || "Owner"}
-    TEL;TYPE=WORK,VOICE:${profile.phone_work || "+123456789"}
-    TEL;TYPE=CELL,VOICE:${profile.phone_mobile || "+1987654321"}
-    TEL;TYPE=HOME,VOICE:${profile.phone_home || "+1123456789"}
-    EMAIL;TYPE=WORK:${profile.email_work || "elizabeth@barcenasdesign.com"}
-    EMAIL;TYPE=HOME:${profile.email_home || "elizabeth.home@example.com"}
-    URL:${profile.website_url || "https://barcenasdesign.com"}
-    ADR;TYPE=WORK:;;${profile.address_street || "123 Design Street"};${
-      profile.address_city || "Los Angeles"
-    };${profile.address_state || "CA"};${profile.address_zip || "90210"};${
-      profile.address_country || "USA"
-    }
-    BDAY:${profile.birthday || "1985-05-12"}
-    NOTE:${
-      profile.notes ||
-      "Award-winning designer and creative director at Barcenas Design."
-    }
-    PHOTO;TYPE=JPEG;VALUE=URI:${
-      profile.photo_url || "https://randomuser.me/api/portraits/women/44.jpg"
-    }
-    X-SOCIALPROFILE;TYPE=linkedin:${
-      profile.linkedin_url || "https://www.linkedin.com/in/elizabethbarcenas"
-    }
-    X-SOCIALPROFILE;TYPE=facebook:${
-      profile.facebook_url || "https://facebook.com/elizabethbarcenas"
-    }
-    X-SOCIALPROFILE;TYPE=youtube:${
-      profile.youtube_url || "https://youtube.com/elizabethbarcenas"
-    }
-    REV:${new Date().toISOString().replace(/[-:]/g, "").split(".")[0]}Z
-    END:VCARD
+                BEGIN:VCARD
+                  VERSION:3.0
+                  N:${profile.last_name};${profile.first_name};;;
+                  FN:${profile.first_name} ${profile.last_name}
+                  ORG:${profile.company_name}
+                  TITLE:Owner
+                  TEL;TYPE=WORK,VOICE:+123456789
+                  TEL;TYPE=CELL,VOICE:+1987654321
+                  TEL;TYPE=HOME,VOICE:+1123456789
+                  EMAIL;TYPE=WORK:elizabeth@barcenasdesign.com
+                  EMAIL;TYPE=HOME:elizabeth.home@example.com
+                  URL:${profile.website_url}
+                  ADR;TYPE=WORK:;;123 Design Street;Los Angeles;CA;90210;USA
+                  BDAY:1985-05-12
+                  NOTE:Award-winning designer and creative director at Barcenas Design.
+                  PHOTO;TYPE=JPEG;VALUE=URI:https://randomuser.me/api/portraits/women/44.jpg
+                  X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/elizabethbarcenas
+                  X-SOCIALPROFILE;TYPE=facebook:https://facebook.com/elizabethbarcenas
+                  X-SOCIALPROFILE;TYPE=youtube:https://youtube.com/elizabethbarcenas
+                  REV:20250414T120000Z
+                END:VCARD
     `.trim();
 
     const blob = new Blob([vCardData], { type: "text/vcard" });
