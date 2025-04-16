@@ -56,6 +56,70 @@ END:VCARD
     URL.revokeObjectURL(url);
   };
 
+  const shareContact = async (profile) => {
+    const vCardData = `
+  BEGIN:VCARD
+  VERSION:3.0
+  N:${profile?.last_name || ""};${profile?.first_name || ""};;;
+  FN:${profile?.first_name || ""} ${profile?.last_name || ""}
+  ORG:${profile?.company_name || ""}
+  TITLE:${profile?.title || "Owner"}
+  TEL;TYPE=WORK,VOICE:+123456789
+  TEL;TYPE=CELL,VOICE:+1987654321
+  TEL;TYPE=HOME,VOICE:+1123456789
+  EMAIL;TYPE=WORK:${profile?.email || "elizabeth@barcenasdesign.com"}
+  EMAIL;TYPE=HOME:elizabeth.home@example.com
+  URL:${profile?.website_url || ""}
+  ADR;TYPE=WORK:;;123 Design Street;Los Angeles;CA;90210;USA
+  BDAY:1985-05-12
+  NOTE:${
+    profile?.note ||
+    "Award-winning designer and creative director at Barcenas Design."
+  }
+  PHOTO;TYPE=JPEG;VALUE=URI:${
+    profile?.photo_url || "https://randomuser.me/api/portraits/women/44.jpg"
+  }
+  X-SOCIALPROFILE;TYPE=linkedin:${
+    profile?.linkedin || "https://www.linkedin.com/in/elizabethbarcenas"
+  }
+  X-SOCIALPROFILE;TYPE=facebook:${
+    profile?.facebook || "https://facebook.com/elizabethbarcenas"
+  }
+  X-SOCIALPROFILE;TYPE=youtube:${
+    profile?.youtube || "https://youtube.com/elizabethbarcenas"
+  }
+  REV:${new Date().toISOString().replace(/[-:]/g, "").split(".")[0]}Z
+  END:VCARD
+  `.trim();
+
+    const blob = new Blob([vCardData], { type: "text/vcard" });
+    const file = new File([blob], `${profile?.first_name || "contact"}.vcf`, {
+      type: "text/vcard",
+    });
+
+    // Web Share API with files (on supported mobile browsers)
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({
+          title: `${profile?.first_name} ${profile?.last_name}`,
+          text: "Here's a contact card",
+          files: [file],
+        });
+      } catch (err) {
+        console.error("Sharing failed:", err);
+      }
+    } else {
+      // fallback to download
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${profile?.first_name || "contact"}.vcf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -173,6 +237,7 @@ END:VCARD
             <button
               className="btn btn-outline-secondary w-100"
               style={{ fontSize: "12px" }}
+              onClick={() => shareContact(profile)}
             >
               SHARE <FaShareAlt />
             </button>
