@@ -50,8 +50,14 @@ export default function BusinessProfileCard() {
   }, [id]);
 
   return (
-    <div className="container py-5 d-flex justify-content-center bg-light min-vh-100">
-      <div className="card shadow-lg w-100" style={{ maxWidth: "400px" }}>
+    <div
+      className="container d-flex justify-content-center  min-vh-100"
+      style={{ backgroundColor: "#fff" }}
+    >
+      <div
+        className="card w-100"
+        style={{ maxWidth: "400px", borderWidth: "0px" }}
+      >
         <div
           className="card-img-top"
           style={{
