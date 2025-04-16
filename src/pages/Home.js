@@ -26,6 +26,31 @@ export default function BusinessProfileCard() {
   const [profile, setProfile] = useState({});
   const id = "71d226d4-217b-4073-a781-b7880987ebfe";
 
+  const handleAddToContacts = () => {
+    const vCardData = `
+BEGIN:VCARD
+VERSION:3.0
+FN:Elizabeth Barcenas
+ORG:Barcenas Design
+TITLE:Owner
+TEL;TYPE=WORK,VOICE:+123456789
+EMAIL:elizabeth@barcenasdesign.com
+END:VCARD
+    `.trim();
+
+    const blob = new Blob([vCardData], { type: "text/vcard" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Elizabeth_Barcenas.vcf";
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -136,6 +161,7 @@ export default function BusinessProfileCard() {
                 backgroundColor: "#24283b",
                 borderColor: "#24283b",
               }}
+              onClick={handleAddToContacts}
             >
               ADD TO CONTACTS
             </button>
