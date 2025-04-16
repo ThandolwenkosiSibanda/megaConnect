@@ -28,27 +28,14 @@ export default function BusinessProfileCard() {
 
   const handleAddToContacts = () => {
     const vCardData = `
-    BEGIN:VCARD
-    VERSION:3.0
-    N:${profile?.last_name || ""};${profile?.first_name || ""};;;
-    FN:${profile?.first_name || ""} ${profile?.last_name || ""}
-    ORG:${profile?.company_name || ""}
-    TITLE:Owner
-    TEL;TYPE=WORK,VOICE:+123456789
-    TEL;TYPE=CELL,VOICE:+1987654321
-    TEL;TYPE=HOME,VOICE:+1123456789
-    EMAIL;TYPE=WORK:elizabeth@barcenasdesign.com
-    EMAIL;TYPE=HOME:elizabeth.home@example.com
-    URL:${profile?.website_url || ""}
-    ADR;TYPE=WORK:;;123 Design Street;Los Angeles;CA;90210;USA
-    BDAY:1985-05-12
-    NOTE:Award-winning designer and creative director at Barcenas Design.
-    PHOTO;TYPE=JPEG;VALUE=URI:https://randomuser.me/api/portraits/women/44.jpg
-    X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/elizabethbarcenas
-    X-SOCIALPROFILE;TYPE=facebook:https://facebook.com/elizabethbarcenas
-    X-SOCIALPROFILE;TYPE=youtube:https://youtube.com/elizabethbarcenas
-    REV:${new Date().toISOString().replace(/[-:]/g, "").split(".")[0]}Z
-    END:VCARD
+                    BEGIN:VCARD
+                      VERSION:3.0
+                      FN:Elizabeth Barcenas
+                      ORG:Barcenas Design
+                      TITLE:Owner
+                      TEL;TYPE=WORK,VOICE:+123456789
+                      EMAIL:elizabeth@barcenasdesign.com
+                    END:VCARD
     `.trim();
 
     const blob = new Blob([vCardData], { type: "text/vcard" });
@@ -56,7 +43,7 @@ export default function BusinessProfileCard() {
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${profile.last_name}${profile.first_name}${profile.id}.vcf`;
+    link.download = "Elizabeth_Barcenas.vcf";
     document.body.appendChild(link);
     link.click();
 
