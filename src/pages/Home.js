@@ -30,11 +30,16 @@ export default function BusinessProfileCard() {
     const vCardData = `
 BEGIN:VCARD
 VERSION:3.0
-FN:Elizabeth Barcenas
-ORG:Barcenas Design
-TITLE:Owner
-TEL;TYPE=WORK,VOICE:+123456789
-EMAIL:elizabeth@barcenasdesign.com
+FN:Thandolwenkosi Sibanda
+ORG:Continuum Creative Agency
+TEL;TYPE=CELL,VOICE:+263776406842
+TEL;TYPE=WORK,VOICE:+263776406842
+TEL;TYPE=HOME,VOICE:+263776406842
+TITLE:Co-founder
+NOTE:Co-founder | App Developer | Website Designer
+URL:https://continuum.co.zw
+ADR;TYPE=WORK:;;1st Floor, 2nd Street, Harare, Zimbabwe
+EMAIL:sibandathandolwenkosi2@gmail.com
 END:VCARD
     `.trim();
 
