@@ -10,6 +10,13 @@ import {
   FaCalendarAlt,
   FaShareAlt,
   FaGlobe,
+  FaBuilding,
+  FaPlayCircle,
+  FaThLarge,
+  FaRegImages,
+  FaRegUserCircle,
+  FaInfo,
+  FaRegShareSquare,
 } from "react-icons/fa";
 import { supabase } from "../utils/supabase";
 
@@ -147,15 +154,93 @@ export default function BusinessProfileCard() {
             <FaGlobe /> Website
           </button>
 
-          <div className="border-top pt-3 mb-3">
+          <div
+            className="d-flex gap-2 mb-3"
+            style={{
+              gap: "0rem",
+              alignItems: "center",
+            }}
+          >
+            <div
+              className="border-top"
+              style={{ flex: 3, height: "100%" }}
+            ></div>
+            <div style={{ flex: 1 }}>
+              <FaBuilding />
+            </div>
+            <div className="border-top" style={{ flex: 3 }}></div>
+          </div>
+
+          <div className="pt-1 mb-3">
             <h6 className="mb-1">About {profile.company_name}</h6>
             <p className="small" style={{ color: "#4f79c0" }}>
               {profile.tag_line}
             </p>
+
+            <div
+              className="row g-2"
+              style={{ gap: "0.5rem", position: "relative" }}
+            >
+              <div className="col-12 position-relative">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+                  alt="Project 1"
+                  className="img-fluid rounded"
+                  style={{ width: "100%", height: "auto" }}
+                />
+
+                {/* Overlay */}
+                <a
+                  href="https://www.youtube.com/watch?v=VIDEO_ID"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="d-flex align-items-center justify-content-center text-white text-decoration-none rounded"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "rgba(0, 0, 0, 0)",
+                    opacity: 1,
+                    zIndex: 10,
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    transition: "opacity 0.3s",
+                  }}
+                >
+                  <FaPlayCircle size={64} />
+                </a>
+              </div>
+            </div>
+
+            <p className="small text-muted text-justify pt-1">
+              Continuum is a far cry from your typical web and mobile app
+              development services provider. We help small to medium business
+              leaders make IT investments with confidence, meet the needs of the
+              business, and optimize user productivity.
+            </p>
+          </div>
+
+          <div
+            className="d-flex gap-2 mb-3"
+            style={{
+              gap: "0rem",
+              alignItems: "center",
+            }}
+          >
+            <div
+              className="border-top"
+              style={{ flex: 3, height: "100%" }}
+            ></div>
+            <div style={{ flex: 1 }}>
+              <FaThLarge />
+            </div>
+            <div className="border-top" style={{ flex: 3 }}></div>
           </div>
 
           {/* Portfolio Section */}
-          <div className="text-start border-top pt-3">
+          <div className="text-start pt-1">
             <h6 className="text-center mb-3">Portfolio</h6>
             <div className="row g-2" style={{ gap: "0.5rem" }}>
               <div className="col-12">
@@ -172,22 +257,166 @@ export default function BusinessProfileCard() {
                   className="img-fluid rounded"
                 />
               </div>
+            </div>
+          </div>
+
+          <button
+            className="btn btn-dark w-100 mb-3 mt-2"
+            style={{ fontSize: "12px", padding: "0.5rem" }}
+          >
+            View More Projects
+          </button>
+
+          <div
+            className="d-flex gap-2 mb-3"
+            style={{
+              gap: "0rem",
+              alignItems: "center",
+            }}
+          >
+            <div
+              className="border-top"
+              style={{ flex: 3, height: "100%" }}
+            ></div>
+            <div style={{ flex: 1 }}>
+              <FaRegUserCircle />
+            </div>
+            <div className="border-top" style={{ flex: 3 }}></div>
+          </div>
+
+          {/* Portfolio Section */}
+          <div className="text-start pt-1">
+            <h6 className="text-center mb-3">About</h6>
+            <div className="row g-2" style={{ gap: "0.5rem" }}>
               <div className="col-12">
                 <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 3"
+                  src={profile.avatar_url}
+                  alt="Project 1"
                   className="img-fluid rounded"
                 />
               </div>
-              <div className="col-12">
+            </div>
+
+            <p className="small text-muted text-justify pt-1">
+              Thando is an experienced Full-Stack Developer proficient in
+              ReactJS, NodeJS, React Native, Typescript, MongoDB, GraphQL,
+              Vanilla JavaScript, and a proven track record of being able to
+              work in a fast-paced collaborative environment....
+            </p>
+            <p className="small text-muted text-justify">Read More</p>
+          </div>
+
+          <div
+            className="d-flex gap-2 mb-3"
+            style={{
+              gap: "0rem",
+              alignItems: "center",
+            }}
+          >
+            <div
+              className="border-top"
+              style={{ flex: 3, height: "100%" }}
+            ></div>
+            <div style={{ flex: 1 }}>
+              <FaRegImages />
+            </div>
+            <div className="border-top" style={{ flex: 3 }}></div>
+          </div>
+
+          {/* Portfolio Section */}
+          <div className="text-start pt-1">
+            <h6 className="text-center mb-3">Gallery</h6>
+            <div className="row g-1">
+              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
                 <img
                   src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 4"
+                  alt="Project 1"
+                  className="img-fluid rounded"
+                />
+              </div>
+              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+                  alt="Project 2"
+                  className="img-fluid rounded"
+                />
+              </div>
+              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+                  alt="Project 2"
+                  className="img-fluid rounded"
+                />
+              </div>
+              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+                  alt="Project 2"
                   className="img-fluid rounded"
                 />
               </div>
             </div>
           </div>
+
+          <div
+            className="d-flex gap-2 mb-3 mt-3"
+            style={{
+              gap: "0rem",
+              alignItems: "center",
+            }}
+          >
+            <div
+              className="border-top"
+              style={{ flex: 3, height: "100%" }}
+            ></div>
+            <div style={{ flex: 1 }}>
+              <FaInfo />
+            </div>
+            <div className="border-top" style={{ flex: 3 }}></div>
+          </div>
+
+          {/* Portfolio Section */}
+          <div className="text-start pt-1">
+            <h6 className="text-center mb-3">Resources</h6>
+          </div>
+
+          <button
+            className="btn btn-dark w-100 mb-3 mt-2"
+            style={{ fontSize: "12px", padding: "0.5rem" }}
+          >
+            Download Our App
+          </button>
+
+          <button
+            className="btn btn-dark w-100 mb-3 mt-2"
+            style={{ fontSize: "12px", padding: "0.5rem" }}
+          >
+            Contact Developers
+          </button>
+
+          <div
+            className="d-flex gap-2 mb-3 mt-3"
+            style={{
+              gap: "0rem",
+              alignItems: "center",
+            }}
+          >
+            <div
+              className="border-top"
+              style={{ flex: 3, height: "100%" }}
+            ></div>
+            <div style={{ flex: 1 }}>
+              <FaRegShareSquare />
+            </div>
+            <div className="border-top" style={{ flex: 3 }}></div>
+          </div>
+
+          <button
+            className="btn btn-dark w-100 mb-3 mt-2"
+            style={{ fontSize: "12px", padding: "0.5rem" }}
+          >
+            Share My Information
+          </button>
         </div>
       </div>
     </div>
