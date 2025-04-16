@@ -28,14 +28,31 @@ export default function BusinessProfileCard() {
 
   const handleAddToContacts = () => {
     const vCardData = `
-BEGIN:VCARD
-VERSION:3.0
-FN:Elizabeth Barcenas
-ORG:Barcenas Design
-TITLE:Owner
-TEL;TYPE=WORK,VOICE:+123456789
-EMAIL:elizabeth@barcenasdesign.com
-END:VCARD
+    BEGIN:VCARD
+    VERSION:3.0
+    N:${profile.last_name};${profile.first_name};;;
+    FN:${profile.first_name} ${profile.last_name}
+    ORG:${profile.company_name}
+    TITLE:${profile.title || "Owner"}
+    TEL;TYPE=WORK,VOICE:${profile.phone_work || ""}
+    TEL;TYPE=CELL,VOICE:${profile.phone_mobile || ""}
+    TEL;TYPE=HOME,VOICE:${profile.phone_home || ""}
+    EMAIL;TYPE=WORK:${profile.email_work || ""}
+    EMAIL;TYPE=HOME:${profile.email_home || ""}
+    URL:${profile.website_url || ""}
+    ADR;TYPE=WORK:;;${profile.address_street || ""};${
+      profile.address_city || ""
+    };${profile.address_state || ""};${profile.address_zip || ""};${
+      profile.address_country || ""
+    }
+    BDAY:${profile.birthday || ""}
+    NOTE:${profile.bio || ""}
+    PHOTO;TYPE=JPEG;VALUE=URI:${profile.avatar_url || ""}
+    X-SOCIALPROFILE;TYPE=linkedin:${profile.linkedin_url || ""}
+    X-SOCIALPROFILE;TYPE=facebook:${profile.facebook_url || ""}
+    X-SOCIALPROFILE;TYPE=youtube:${profile.youtube_url || ""}
+    REV:${new Date().toISOString().replace(/[-:]/g, "").split(".")[0]}Z
+    END:VCARD
     `.trim();
 
     const blob = new Blob([vCardData], { type: "text/vcard" });
@@ -43,7 +60,7 @@ END:VCARD
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = "Elizabeth_Barcenas.vcf";
+    link.download = `${profile.last_name}${profile.first_name}${profile.id}.vcf`;
     document.body.appendChild(link);
     link.click();
 
