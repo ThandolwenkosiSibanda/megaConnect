@@ -28,27 +28,34 @@ export default function BusinessProfileCard() {
 
   const handleAddToContacts = () => {
     const vCardData = `
-BEGIN:VCARD
-VERSION:3.0
-FN:Elizabeth Barcenas
-ORG:Barcenas Design
-TITLE:Owner
-TEL;TYPE=WORK,VOICE:+123456789
-EMAIL:elizabeth@barcenasdesign.com
-END:VCARD
+  BEGIN:VCARD
+  VERSION:3.0
+  FN:Elizabeth Barcenas
+  ORG:Barcenas Design
+  TITLE:Owner
+  TEL;TYPE=WORK,VOICE:+123456789
+  EMAIL:elizabeth@barcenasdesign.com
+  END:VCARD
     `.trim();
 
     const blob = new Blob([vCardData], { type: "text/vcard" });
     const url = URL.createObjectURL(blob);
 
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "Elizabeth_Barcenas.vcf";
-    document.body.appendChild(link);
-    link.click();
+    // Create a temporary <a> link and auto-click it
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Elizabeth_Barcenas.vcf";
+    a.style.display = "none";
 
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    // Optional: try to open the file in a new tab (especially on mobile)
+    setTimeout(() => {
+      window.open(url, "_blank");
+      URL.revokeObjectURL(url);
+    }, 500);
   };
 
   useEffect(() => {
