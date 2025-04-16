@@ -28,14 +28,14 @@ export default function BusinessProfileCard() {
 
   const handleAddToContacts = () => {
     const vCardData = `
-                    BEGIN:VCARD
-                      VERSION:3.0
-                      FN:Elizabeth Barcenas
-                      ORG:Barcenas Design
-                      TITLE:Owner
-                      TEL;TYPE=WORK,VOICE:+123456789
-                      EMAIL:elizabeth@barcenasdesign.com
-                    END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Elizabeth Barcenas
+ORG:Barcenas Design
+TITLE:Owner
+TEL;TYPE=WORK,VOICE:+123456789
+EMAIL:elizabeth@barcenasdesign.com
+END:VCARD
     `.trim();
 
     const blob = new Blob([vCardData], { type: "text/vcard" });
