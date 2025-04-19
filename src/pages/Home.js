@@ -17,6 +17,7 @@ import {
   FaRegUserCircle,
   FaInfo,
   FaRegShareSquare,
+  FaAddressCard,
 } from "react-icons/fa";
 import { supabase } from "../utils/supabase";
 
@@ -24,6 +25,8 @@ export default function BusinessProfileCard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
   const [profile, setProfile] = useState({});
+  const [projectsPerPage, setProjectsPerPage] = useState(2);
+  const [galleryItemsPerPage, setGalleryItemsPerPage] = useState(2);
   const id = "71d226d4-217b-4073-a781-b7880987ebfe";
 
   const handleAddToContacts = () => {
@@ -157,42 +160,91 @@ END:VCARD
             {profile.company_name}
           </p>
           <p className="text-muted">
-            Co-founder | App Developer | Website Designer
+            {profile?.positions?.map((position) => position).join(" | ")}
+            {/* Co-founder | App Developer | Website Designer */}
           </p>
 
           <div className="row text-center mb-3">
             <div className="col-3">
-              <FaEnvelope title="Email" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>Email</div>
+              <a
+                href={`mailto:${profile.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaEnvelope title="Email" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>Email</div>
+              </a>
             </div>
             <div className="col-3">
-              <FaPhone title="Call" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>Phone</div>
+              <a
+                href={`tel:${profile.phone}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaPhone title="Call" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>Phone</div>
+              </a>
             </div>
             <div className="col-3">
-              <FaCommentDots title="Text" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>SMS</div>
+              <a
+                href={`sms:${profile.phone}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaCommentDots title="Text" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>SMS</div>
+              </a>
             </div>
             <div className="col-3">
-              <FaLink title="Connect" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>Connect</div>
+              <a
+                href={profile.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLink title="Connect" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>Connect</div>
+              </a>
             </div>
             <div className="col-3">
-              <FaLinkedin title="LinkedIn" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>LinkedIn</div>
+              <a
+                href={profile.linkedin_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin title="LinkedIn" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>LinkedIn</div>
+              </a>
             </div>
             <div className="col-3">
-              <FaFacebook title="Facebook" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>Facebook</div>
+              <a
+                href={profile.facebook_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebook title="Facebook" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>Facebook</div>
+              </a>
             </div>
             <div className="col-3">
-              <FaYoutube title="YouTube" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>Youtube</div>
+              <a
+                href={profile.youtube_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaYoutube title="YouTube" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>Youtube</div>
+              </a>
             </div>
-            <div className="col-3">
-              <FaCalendarAlt title="Book Me" style={{ color: "#4f79c0" }} />
-              <div style={{ fontSize: "12px" }}>Book Me</div>
-            </div>
+            {/* <div className="col-3">
+              <a
+                href={profile.booking_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaCalendarAlt title="Book Me" style={{ color: "#4f79c0" }} />
+                <div style={{ fontSize: "12px" }}>Book Me</div>
+              </a>
+            </div> */}
           </div>
 
           <div className="d-flex gap-2 mb-3" style={{ gap: "0.5rem" }}>
@@ -205,7 +257,7 @@ END:VCARD
               }}
               onClick={handleAddToContacts}
             >
-              ADD TO CONTACTS
+              <FaAddressCard /> ADD TO CONTACTS
             </button>
             <button
               className="btn btn-outline-secondary w-100"
@@ -216,12 +268,19 @@ END:VCARD
             </button>
           </div>
 
-          <button
+          <a
+            href={profile.website_url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-dark w-100 mb-3"
-            style={{ fontSize: "12px" }}
+            style={{
+              fontSize: "12px",
+              textDecoration: "none",
+              display: "inline-block",
+            }}
           >
             <FaGlobe /> Website
-          </button>
+          </a>
 
           <div
             className="d-flex gap-2 mb-3"
@@ -252,8 +311,8 @@ END:VCARD
             >
               <div className="col-12 position-relative">
                 <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 1"
+                  src={profile.company_banner_url}
+                  alt="Company Banner"
                   className="img-fluid rounded"
                   style={{ width: "100%", height: "auto" }}
                 />
@@ -284,10 +343,7 @@ END:VCARD
             </div>
 
             <p className="small text-muted text-justify pt-1">
-              Continuum is a far cry from your typical web and mobile app
-              development services provider. We help small to medium business
-              leaders make IT investments with confidence, meet the needs of the
-              business, and optimize user productivity.
+              {profile.company_bio}
             </p>
           </div>
 
@@ -312,32 +368,32 @@ END:VCARD
           <div className="text-start pt-1">
             <h6 className="text-center mb-3">Portfolio</h6>
             <div className="row g-2" style={{ gap: "0.5rem" }}>
-              <div className="col-12">
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 1"
-                  className="img-fluid rounded"
-                />
-              </div>
-              <div className="col-12">
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 2"
-                  className="img-fluid rounded"
-                />
-              </div>
+              {profile?.projects
+                ?.slice(0, projectsPerPage)
+                .map((project, index) => (
+                  <div className="col-12" key={index}>
+                    <img
+                      src={project}
+                      alt={project}
+                      className="img-fluid rounded"
+                    />
+                  </div>
+                ))}
             </div>
           </div>
 
-          <button
-            className="btn btn-dark w-100 mb-3 mt-2"
-            style={{ fontSize: "12px", padding: "0.5rem" }}
-          >
-            View More Projects
-          </button>
+          {profile?.projects?.length > projectsPerPage && (
+            <button
+              className="btn btn-dark w-100 mb-3 mt-2"
+              style={{ fontSize: "12px", padding: "0.5rem" }}
+              onClick={() => setProjectsPerPage((prev) => prev + 3)}
+            >
+              View More Projects
+            </button>
+          )}
 
           <div
-            className="d-flex gap-2 mb-3"
+            className="d-flex gap-2 mb-3 mt-3"
             style={{
               gap: "0rem",
               alignItems: "center",
@@ -354,25 +410,19 @@ END:VCARD
           </div>
 
           {/* Portfolio Section */}
-          <div className="text-start pt-1">
+          <div className="text-start pt-1 ">
             <h6 className="text-center mb-3">About</h6>
             <div className="row g-2" style={{ gap: "0.5rem" }}>
               <div className="col-12">
                 <img
                   src={profile.avatar_url}
-                  alt="Project 1"
+                  alt="User Image"
                   className="img-fluid rounded"
                 />
               </div>
             </div>
 
-            <p className="small text-muted text-justify pt-1">
-              Thando is an experienced Full-Stack Developer proficient in
-              ReactJS, NodeJS, React Native, Typescript, MongoDB, GraphQL,
-              Vanilla JavaScript, and a proven track record of being able to
-              work in a fast-paced collaborative environment....
-            </p>
-            <p className="small text-muted text-justify">Read More</p>
+            <p className="small text-muted text-justify pt-1">{profile.bio}</p>
           </div>
 
           <div
@@ -396,36 +446,29 @@ END:VCARD
           <div className="text-start pt-1">
             <h6 className="text-center mb-3">Gallery</h6>
             <div className="row g-1">
-              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 1"
-                  className="img-fluid rounded"
-                />
-              </div>
-              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 2"
-                  className="img-fluid rounded"
-                />
-              </div>
-              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 2"
-                  className="img-fluid rounded"
-                />
-              </div>
-              <div className="col-6" style={{ marginBottom: "0.5rem" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-                  alt="Project 2"
-                  className="img-fluid rounded"
-                />
-              </div>
+              {profile?.gallery
+                ?.slice(0, galleryItemsPerPage)
+                .map((item, index) => (
+                  <div
+                    className="col-6"
+                    key={index}
+                    style={{ marginBottom: "0.5rem" }}
+                  >
+                    <img src={item} alt={item} className="img-fluid rounded" />
+                  </div>
+                ))}
             </div>
           </div>
+
+          {profile?.gallery?.length > galleryItemsPerPage && (
+            <button
+              className="btn btn-dark w-100 mb-3 mt-2"
+              style={{ fontSize: "12px", padding: "0.5rem" }}
+              onClick={() => setGalleryItemsPerPage((prev) => prev + 4)}
+            >
+              View More
+            </button>
+          )}
 
           <div
             className="d-flex gap-2 mb-3 mt-3"

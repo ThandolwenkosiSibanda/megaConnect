@@ -30,6 +30,10 @@ import AdminOrder from "./pages/AdminOrder";
 import AdminBanners from "./pages/AdminBanners";
 import AdminBanner from "./pages/AdminBanner";
 import AdminBannerNew from "./pages/AdminBannerNew";
+import Profile from "./pages/profile";
+import ProfileNew from "./pages/ProfileNew";
+import AdminProfiles from "./pages/AdminProfiles";
+import AdminProfile from "./pages/AdminProfile";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -40,26 +44,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/products/:id" element={<Product />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/brand_new" element={<NewProducts />} />
-          <Route path="/promotions" element={<ProductPromotions />} />
-          <Route path="/best_sellers" element={<BestSellers />} />
+          <Route path="/profiles/:id" element={<Profile />} />
 
-          <Route path="/category/:id" element={<Shop />} />
-          <Route path="/ordersucess" element={<OrderThanks />} />
-          <Route path="/newproduct" element={<ProductNew />} />
-          <Route path="/admin_products" element={<AdminProducts />} />
-          <Route path="/admin_products/:id" element={<AdminProduct />} />
-          <Route path="/admin_categories" element={<AdminCategories />} />
-          <Route path="/admin_categories/:id" element={<AdminCategory />} />
-          <Route path="/admin_newcategory" element={<AdminCategoryNew />} />
-          <Route path="/admin_orders" element={<AdminOrders />} />
-          <Route path="/admin_orders/:id" element={<AdminOrder />} />
-          <Route path="/admin_banners" element={<AdminBanners />} />
-          <Route path="/admin_banners/:id" element={<AdminBanner />} />
-          <Route path="/admin_new_banner" element={<AdminBannerNew />} />
+          <Route path="/admin_new_profile" element={<ProfileNew />} />
+          <Route path="/admin_profiles" element={<AdminProfiles />} />
+          <Route path="/admin_profiles/:id" element={<AdminProfile />} />
 
           {!user ? (
             <>
