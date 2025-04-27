@@ -1,0 +1,33 @@
+# Dependency folders
+
+node_modules/
+
+# Version control
+
+.git
+.gitignore
+
+# Docker build files
+
+Dockerfile
+docker-compose.yml
+
+# Build artifacts
+
+dist/
+build/
+
+# Logs and environment variables
+
+\*.log
+.env
+
+# IDE/editor directories
+
+.vscode/
+.idea/
+
+# OS files
+
+.DS_Store
+Thumbs.db
